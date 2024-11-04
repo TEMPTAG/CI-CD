@@ -1,33 +1,39 @@
 name: Deploy to Render
 
+# Trigger this GitHub Action when code is pushed to or a pull request is made for the main branch
 on:
   push:
-    branches: [main]
+    branches: [main] # Trigger on pushes to the main branch
   pull_request:
     branches:
-      - main
+      - main # Also trigger on pull requests to the main branch
 
 jobs:
   deploy:
     name: Deploy To Render
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Use the latest version of Ubuntu to run the deployment
+
     services:
+      # Set up a MongoDB service using version 5.0 of MongoDB
       mongodb:
         image: mongo:5.0
         ports:
-          - 27017:27017
-        options: >-
+          - 27017:27017 # Map the default MongoDB port (27017)
+        options: >- # Additional options for health checks
           --health-cmd="mongosh --eval 'db.runCommand({ ping: 1 })'"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
 
     steps:
+      # Step 1: Check out the latest code from the main branch
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # Step 2: Deploy the application to Render using the Deploy Hook URL
       - name: Deploy to Render
         env:
           RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        # Trigger the deployment using the deploy hook URL
         run: |
           curl "$RENDER_DEPLOY_HOOK_URL"
