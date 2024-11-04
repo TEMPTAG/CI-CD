@@ -12,7 +12,12 @@
 
 This project demonstrates the implementation of a CI/CD pipeline using GitHub Actions, Cypress for component testing, and automatic deployment to Render. The application is a full-stack coding quiz built using the MERN (MongoDB, Express, React, Node.js) stack, and TypeScript for server-side logic.
 
+Screenshot of the deployed application on load:
+![Rendered Application Screenshot](/assets/readme_assets/applicationScreenshot.jpg)
+
 [Visit the Deployed Application](https://ci-cd-epzt.onrender.com/)
+
+Screenshot of the
 
 ---
 
@@ -106,6 +111,12 @@ This project demonstrates the implementation of a CI/CD pipeline using GitHub Ac
 1. Set up a Render service and configure it to pull the repository from GitHub.
 2. Disable Auto-Deploy and get the Render Deploy Hook URL.
 3. Configure GitHub Actions by adding the deploy hook URL as a secret in the repository settings.
+
+Checking Tests results:
+![Screenshot of Checking Tests Results on GitHub](/assets/readme_assets/checkingTests.jpg)
+
+Deploy To Render results:
+![Screenshot of Deploy To Render Results on GitHub](/assets/readme_assets/deployTests.jpg)
 
 ---
 
