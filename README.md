@@ -10,6 +10,10 @@
 
 ## Description
 
+This project demonstrates the implementation of a CI/CD pipeline using GitHub Actions, Cypress for component testing, and automatic deployment to Render. The application is a full-stack coding quiz built using the MERN (MongoDB, Express, React, Node.js) stack, and TypeScript for server-side logic.
+
+[Visit the Deployed Application](https://ci-cd-epzt.onrender.com/)
+
 ---
 
 ## Table of Contents
@@ -26,9 +30,25 @@
 
 ## Features
 
+- Full-stack application with a MERN stack.
+- Component tests using Cypress.
+- Continuous Integration with GitHub Actions for testing.
+- Continuous Deployment to Render when changes are merged into the main branch.
+- TypeScript integration for the server-side code.
+
 ---
 
 ## Technologies Used
+
+- Node.js (v22.10.0)
+- Bun (v1.1.0)
+- MongoDB (v5.0)
+- Express (Server-side framework)
+- React (Client-side framework)
+- TypeScript (Strongly-typed JavaScript)
+- Vite (Front-end build tool)
+- Cypress (End-to-end and component testing framework)
+- Render (Cloud hosting service)
 
 ---
 
@@ -55,9 +75,37 @@
    cd CI-CD
    ```
 
+3. **Install the Dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+4. **Set up environment variables**:
+
+   > Create a .env file in the root directory and set up any required environment variables, such as MongoDB connection strings, if necessary.
+
+5. **Seed the Database**:
+
+   ```bash
+   npm run seed
+   ```
+
+6. **Run the application**:
+   ```bash
+   npm start
+   ```
+   > The application will run locally on http://localhost:3001
+
 ---
 
 ## Usage
+
+**To deploy the application to Render, follow these steps**:
+
+1. Set up a Render service and configure it to pull the repository from GitHub.
+2. Disable Auto-Deploy and get the Render Deploy Hook URL.
+3. Configure GitHub Actions by adding the deploy hook URL as a secret in the repository settings.
 
 ---
 
