@@ -1,5 +1,6 @@
 name: Checking Tests
 
+# Trigger this GitHub Action when a pull request is made to the develop branch
 on:
   pull_request:
     branches:
@@ -8,42 +9,51 @@ on:
 jobs:
   test:
     name: Checking Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Use the latest version of Ubuntu to run the tests
 
     services:
+      # Set up a MongoDB service using the latest MongoDB image from Docker Hub
       mongodb:
-        image: mongo:latest
+        image: mongo:latest # MongoDB version
         ports:
-          - 27017:27017
-        options: >-
+          - 27017:27017 # Map MongoDB default port
+        options: >- # Additional options for health checks
           --health-cmd="mongosh --eval 'db.runCommand({ ping: 1 })'"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
 
     steps:
+      # Step 1: Check out the code from the repository
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # Step 2: Set up Node.js with the specified version
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "21.x"
+          node-version: "21.x" # Specify Node.js version
 
+      # Step 3: Install project dependencies from package.json
       - name: Install Dependencies
         run: npm install
 
+      # Step 4: Build the app (server and client)
       - name: Build App
         run: npm run build
 
+      # Step 5: Seed the database with initial data
       - name: Seed Database
         run: npm run seed
 
+      # Step 6: Start the server in the background
       - name: Start Server
         run: npm start &
 
+      # Step 7: Wait for the server to start on port 3001 before running tests
       - name: Wait for Server to Start
         run: npx wait-on http://localhost:3001
 
+      # Step 8: Run Cypress component tests
       - name: Run Component Tests
         run: npm run test-component
