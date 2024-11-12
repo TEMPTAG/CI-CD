@@ -14,13 +14,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Serve static files from the client's dist folder
-app.use(express.static(path.resolve(__dirname, "../client/dist")));
+app.use(express.static(path.resolve(__dirname, "../../client/dist")));
 
 app.use(routes);
 
 // Catch-all route for client-side routing
 app.get("*", (_req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/dist/index.html"));
+  res.sendFile(path.resolve(__dirname, "../../client/dist/index.html"));
 });
 
 // Error handling for the database connection
